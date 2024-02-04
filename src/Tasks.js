@@ -11,7 +11,7 @@ function Tasks() {
   const [tasks, setTasks] = useState([
     {
       number: 1,
-      title: "STEP 1: Permits and Paperwork",
+      title: "Permits and Paperwork",
       icon: "document-text-outline",
       subtitle:
         "Important documents and permits.",
@@ -29,7 +29,7 @@ function Tasks() {
     },
     {
       number: 2,
-      title: "STEP 2: Housing",
+      title: "Housing",
       icon: "home-outline",
       subtitle: "Start researching housing options online.",
       actions: [
@@ -46,7 +46,7 @@ function Tasks() {
     },
     {
       number: 3,
-      title: "STEP 3: Transportation",
+      title: "Transportation",
       icon: "car-outline",
       subtitle: "Drivers license, insurance and public tran...",
       actions: [
@@ -63,7 +63,7 @@ function Tasks() {
     },
     {
       number: 4,
-      title: "STEP 4: Employment",
+      title: "Employment",
       icon: "person-outline",
       subtitle: "Find that perfect job in your profession.",
       actions: [
@@ -80,7 +80,7 @@ function Tasks() {
     },
     {
       number: 5,
-      title: "STEP 5: Banking & Finance",
+      title: "Banking & Finance",
       icon: "card-outline",
       subtitle: "Get a bank account, credit card or loan.",
       actions: [
