@@ -11,6 +11,10 @@
         "@rnmapbox/maps",
         {
           "RNMapboxMapsDownloadToken": "pk.eyJ1IjoiZGppbnBhcmsxIiwiYSI6ImNsczZmMHR5YTBucWMyam54cDBwYnh2MDIifQ.05SO4raKDtndy7LISP2axQ"
+        },
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Show current location on map."
         }
       ]
     ],
@@ -21,13 +25,15 @@
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "iosbundle"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.djinpark1.curated_app"
     },
     "web": {
       "favicon": "./assets/favicon.png"
