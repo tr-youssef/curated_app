@@ -23,7 +23,6 @@ const Chat = () => {
     setMessages([...messages, newMessage]);
     setInputText("");
   };
-  console.log("messages.length", messages.length);
   return (
     <View style={styles.container}>
       {messages.length !== 0 ? (

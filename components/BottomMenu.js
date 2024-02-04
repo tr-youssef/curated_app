@@ -4,7 +4,7 @@ import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from "../src/Home.js";
-import Map from "../src/Home.js";
+import Map from "../src/Map.js";
 import Tasks from "../src/Tasks.js";
 import Mentors from "../src/Mentors.js";
 import Profile from "../src/Profile.js";

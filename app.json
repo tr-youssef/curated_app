@@ -10,11 +10,7 @@
       [
         "@rnmapbox/maps",
         {
-          "RNMapboxMapsDownloadToken": "pk.eyJ1IjoiZGppbnBhcmsxIiwiYSI6ImNsczZmMHR5YTBucWMyam54cDBwYnh2MDIifQ.05SO4raKDtndy7LISP2axQ"
-        },
-        "expo-location",
-        {
-          "locationWhenInUsePermission": "Show current location on map."
+          "RNMapboxMapsDownloadToken": "sk.eyJ1IjoiZGppbnBhcmsxIiwiYSI6ImNsczc5amF0bzFxcGcybGw4eDdtanAwajgifQ.xMLaVK6pM389orTVSH9oDw"
         }
       ]
     ],
