@@ -4,6 +4,10 @@ import Chat from "../components/Chat.js";
 import ActionPlan from "../components/ActionPlan.js";
 
 function Tasks() {
+  const [isFullHeight, setIsFullHeightetIsFullHeight] = useState(false);
+  const toggleWidth = () => {
+    setIsFullHeightetIsFullHeight((prev) => !prev);
+  };
   const [tasks, setTasks] = useState([
     {
       number: 1,
@@ -94,8 +98,10 @@ function Tasks() {
   ]);
   return (
     <SafeAreaView style={styles.container}>
-      <Chat />
-      <ActionPlan tasks={tasks} />
+      <View style={styles.wrapper}>
+        <Chat isFullHeight={isFullHeight} toggleWidth={toggleWidth} />
+        <ActionPlan tasks={tasks} />
+      </View>
     </SafeAreaView>
   );
 }
@@ -106,5 +112,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     margin: 16,
+  },
+
+  wrapper: {
+    flex: 1,
   },
 });

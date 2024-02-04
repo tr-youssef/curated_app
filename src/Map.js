@@ -1,5 +1,5 @@
-import React, { useRef } from "react";
-import { StyleSheet, View } from "react-native";
+import React, { useRef, useState } from "react";
+import { StyleSheet, View, Modal, Text, TouchableOpacity } from "react-native";
 import Mapbox, { Images, ShapeSource, SymbolLayer } from "@rnmapbox/maps";
 import { mapIcons } from "../components/Pins.js";
 import { featureCollection, feature, point } from "@turf/helpers";
@@ -11,8 +11,12 @@ Mapbox.setAccessToken(
 function Map() {
   const mapRef = useRef(null);
   const cameraRef = useRef(null);
+  const [modalVisible, setModalVisible] = useState(false);
+  const [modalPosition, setModalPosition] = useState({ x: 0, y: 0 });
   const stateFeatureCollection = featureCollection([point([-114.05, 51.05])]);
-
+  const openModal = (e) => {
+    setModalVisible(true);
+  };
   return (
     <View ref={mapRef} style={styles.page}>
       <View style={styles.container}>
@@ -28,7 +32,7 @@ function Map() {
           <ShapeSource
             id="symbolLocationSource"
             hitbox={{ width: 20, height: 20 }}
-            // onPress={(e) => onSourceLayerPress(e)}
+            onPress={(e) => openModal(e)}
             shape={stateFeatureCollection}
           >
             <SymbolLayer
@@ -39,6 +43,30 @@ function Map() {
             <Images images={{ icon: mapIcons.icon }} />
           </ShapeSource>
         </Mapbox.MapView>
+        <Modal
+          transparent={true}
+          animationType="slide"
+          visible={modalVisible}
+          onRequestClose={() => setModalVisible(false)}
+        >
+          <View
+            style={[
+              styles.modalContainer,
+              {
+                width: "80%",
+                height: "80%",
+                justifyContent: "center",
+                alignItems: "center",
+                backgroundColor: "white",
+              },
+            ]}
+          >
+            <Text>This is your modal content</Text>
+            <TouchableOpacity onPress={() => setModalVisible(false)}>
+              <Text>Close Modal</Text>
+            </TouchableOpacity>
+          </View>
+        </Modal>
       </View>
     </View>
   );

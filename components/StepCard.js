@@ -43,8 +43,8 @@ const StepCard = ({ task }) => {
       </View>
       {isOpen && (
         <View style={styles.actions}>
-          {task.actions.map((action) => {
-            return <Text>{action}</Text>;
+          {task.actions.map((action, index) => {
+            return <Text key={index}>{action}</Text>;
           })}
         </View>
       )}

@@ -6,25 +6,83 @@ import {
   StyleSheet,
   FlatList,
   Image,
+  Animated,
+  Easing,
 } from "react-native";
 
 import React, { useState } from "react";
 
-const Chat = () => {
-  const [messages, setMessages] = useState([
-    // { type: "ai", text: "test test test" },
-  ]);
+const Chat = ({ isFullHeight, toggleWidth }) => {
+  const [messages, setMessages] = useState([]);
   const [inputText, setInputText] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [rotation] = useState(new Animated.Value(0));
 
-  const handleSendMessage = () => {
+  const startRotationAnimation = () => {
+    Animated.loop(
+      Animated.timing(rotation, {
+        toValue: 1,
+        duration: 1000,
+        easing: Easing.linear,
+        useNativeDriver: false,
+      })
+    ).start();
+  };
+
+  const stopRotationAnimation = () => {
+    Animated.timing(rotation).stop();
+    rotation.setValue(0);
+  };
+
+  const handleSendMessage = async () => {
     if (inputText.trim() === "") return;
 
+    setLoading(true);
+
+    toggleWidth();
+    console.log("isFullHeight", isFullHeight);
     const newMessage = { type: "me", text: inputText };
-    setMessages([...messages, newMessage]);
+    setMessages((prevMessages) => [...prevMessages, newMessage]);
     setInputText("");
+
+    startRotationAnimation();
+
+    try {
+      const answer = await fetch(
+        "https://81a4-199-185-133-7.ngrok-free.app/chatbot",
+        {
+          headers: {
+            "Content-type": "application/json",
+          },
+          method: "POST",
+          body: JSON.stringify({ question: inputText }),
+        }
+      );
+      const finalanswer = await answer.json();
+      const newOtherMessage = { type: "other", text: finalanswer.answer };
+      setMessages((prevMessages) => [...prevMessages, newOtherMessage]);
+    } catch (error) {
+      // Handle fetch error if needed
+      console.error("Error fetching data:", error);
+    } finally {
+      stopRotationAnimation();
+      setLoading(false);
+    }
   };
+
   return (
-    <View style={styles.container}>
+    <View style={isFullHeight ? styles.fullScreenContainer : styles.container}>
+      <View
+        style={{
+          width: "100%",
+          flexDirection: "row",
+          justifyContent: "flex-end",
+        }}
+      >
+        <TouchableOpacity style={styles.buttonClose} onPress={toggleWidth}>
+          <Text style={{ color: "white" }}>X</Text>
+        </TouchableOpacity>
+      </View>
       {messages.length !== 0 ? (
         <FlatList
           data={messages}
@@ -67,8 +125,28 @@ const Chat = () => {
           value={inputText}
           onChangeText={(text) => setInputText(text)}
         />
-        <TouchableOpacity style={styles.button} onPress={handleSendMessage}>
-          <Text style={styles.buttonText}>GO</Text>
+        <TouchableOpacity
+          style={styles.button}
+          onPress={handleSendMessage}
+          disabled={loading}
+        >
+          <Animated.Text
+            style={[
+              styles.buttonText,
+              {
+                transform: [
+                  {
+                    rotate: rotation.interpolate({
+                      inputRange: [0, 1],
+                      outputRange: ["0deg", "360deg"],
+                    }),
+                  },
+                ],
+              },
+            ]}
+          >
+            GO
+          </Animated.Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -82,6 +160,19 @@ const styles = StyleSheet.create({
     padding: 16,
     justifyContent: "flex-end",
     height: 341,
+    shadowColor: "#EBECF7",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.3,
+    shadowRadius: 15,
+    elevation: 5,
+    backgroundColor: "white",
+    padding: 16, // Add padding as needed
+    borderRadius: 8, // Add borderRadius as needed
+  },
+  fullScreenContainer: {
+    padding: 16,
+    justifyContent: "flex-end",
+    height: "100%",
     shadowColor: "#EBECF7",
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.3,
@@ -115,14 +206,12 @@ const styles = StyleSheet.create({
   meMessage: {
     backgroundColor: "#3498db",
     borderRadius: 8,
-    maxWidth: "70%",
     padding: 8,
     marginVertical: 4,
   },
   otherMessage: {
     backgroundColor: "#3F49A4",
     borderRadius: 8,
-    maxWidth: "70%",
     padding: 8,
     marginVertical: 4,
     marginLeft: 8,
@@ -151,6 +240,14 @@ const styles = StyleSheet.create({
     height: 39,
     width: 39,
     backgroundColor: "#3F49A4",
+    borderRadius: 50,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  buttonClose: {
+    height: 24,
+    width: 24,
+    backgroundColor: "#FFCC4B",
     borderRadius: 50,
     justifyContent: "center",
     alignItems: "center",
