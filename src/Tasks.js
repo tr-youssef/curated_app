@@ -7,10 +7,10 @@ function Tasks() {
   const [tasks, setTasks] = useState([
     {
       number: 1,
-      title: "Permits and Paperwork",
-      icon: "card",
+      title: "STEP 1: Permits and Paperwork",
+      icon: "document-text-outline",
       subtitle:
-        "Permits are an important part of gaining Permanent Residence Status. Ensure you look over each document to meet ",
+        "Important documents and permits.",
       actions: [
         "Permanent Resident Card (PR Card)",
         "Record of Landing (IMM 1000) or Confirmation of Permanent",
@@ -25,9 +25,9 @@ function Tasks() {
     },
     {
       number: 2,
-      title: "Housing",
-      icon: "home",
-      subtitle: "Start researching housing options online",
+      title: "STEP 2: Housing",
+      icon: "home-outline",
+      subtitle: "Start researching housing options online.",
       actions: [
         "Permanent Resident Card (PR Card)",
         "Record of Landing (IMM 1000) or Confirmation of Permanent",
@@ -42,9 +42,9 @@ function Tasks() {
     },
     {
       number: 3,
-      title: "Housing",
-      icon: "home",
-      subtitle: "Start researching housing options online",
+      title: "STEP 3: Transportation",
+      icon: "car-outline",
+      subtitle: "Drivers license, insurance and public tran...",
       actions: [
         "Permanent Resident Card (PR Card)",
         "Record of Landing (IMM 1000) or Confirmation of Permanent",
@@ -59,9 +59,9 @@ function Tasks() {
     },
     {
       number: 4,
-      title: "Housing",
-      icon: "home",
-      subtitle: "Start researching housing options online",
+      title: "STEP 4: Employment",
+      icon: "person-outline",
+      subtitle: "Find that perfect job in your profession.",
       actions: [
         "Permanent Resident Card (PR Card)",
         "Record of Landing (IMM 1000) or Confirmation of Permanent",
@@ -76,9 +76,9 @@ function Tasks() {
     },
     {
       number: 5,
-      title: "Housing",
-      icon: "home",
-      subtitle: "Start researching housing options online",
+      title: "STEP 5: Banking & Finance",
+      icon: "card-outline",
+      subtitle: "Get a bank account, credit card or loan.",
       actions: [
         "Permanent Resident Card (PR Card)",
         "Record of Landing (IMM 1000) or Confirmation of Permanent",
