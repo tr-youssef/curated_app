@@ -49,7 +49,7 @@ const Chat = ({ isFullHeight, toggleWidth }) => {
 
     try {
       const answer = await fetch(
-        "https://81a4-199-185-133-7.ngrok-free.app/chatbot",
+        "https://bostiebot-production.up.railway.app/chatbot",
         {
           headers: {
             "Content-type": "application/json",
